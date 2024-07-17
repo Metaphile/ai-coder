@@ -1,0 +1,23 @@
+services:
+  sandbox:
+    container_name: ai-coder-sandbox
+    build: ./docker/sandbox
+    volumes:
+      - type: bind
+        source: /Users/adamsiler/projects/ai-coder-sandbox
+        target: /home
+    stdin_open: true
+    tty: true
+    working_dir: /home
+    
+  mongodb:
+    container_name: ai-coder-mongodb
+    build: ./docker/mongodb
+    volumes:
+      - mongodb_data:/data/db
+    ports:
+      - 27017:27017
+
+volumes:
+  sandbox:
+  mongodb_data:
