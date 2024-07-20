@@ -1,16 +1,13 @@
-# Use an official Node.js image as the base image
 FROM node:latest
 
-# Install necessary tools
 RUN apt-get update && \
     apt-get install -y git jq man-db && \
     apt-get clean
 
-# Create app directory
-WORKDIR /sandbox
+RUN useradd --create-home --shell /bin/bash agentuser
 
-# Define the volume
-VOLUME ["/sandbox"]
+USER agentuser
 
-# TODO do we need this?
-CMD ["sh"]
+WORKDIR /home/agentuser
+
+VOLUME ["/home/agentuser"]

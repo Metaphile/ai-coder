@@ -70,7 +70,7 @@ export const runShellCommandTool = new DynamicTool({
   name: TOOL_NAME,
   description: [
     `Executes a Bash command in a new shell and returns the result.`,
-    `Each new shell starts in a shared project directory.`,
+    `Each new shell starts in your home directory.`,
     `Be careful to properly escape special characters. You may have to double- or triple-escape characters.`,
   ].join(" "),
   func: async (command) => {

@@ -5,10 +5,10 @@ services:
     volumes:
       - type: bind
         source: /Users/adamsiler/projects/ai-coder-sandbox
-        target: /home
+        target: /home/agentuser
     stdin_open: true
     tty: true
-    working_dir: /home
+    working_dir: /home/agentuser
     
   mongodb:
     container_name: ai-coder-mongodb
