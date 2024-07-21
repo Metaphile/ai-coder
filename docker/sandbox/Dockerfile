@@ -8,6 +8,8 @@ RUN useradd --create-home --shell /bin/bash agentuser
 
 USER agentuser
 
-WORKDIR /home/agentuser
+RUN mkdir -p /home/agentuser/project
+
+WORKDIR /home/agentuser/project
 
 VOLUME ["/home/agentuser"]
