@@ -4,6 +4,11 @@ import { Tool } from "./tool"
 type OpenAIMessage = OpenAI.Chat.Completions.ChatCompletionMessageParam
 type OpenAIToolCall = OpenAI.Chat.Completions.ChatCompletionMessageToolCall
 
+export enum AgentRole {
+  TechnicalProjectManager = "TechnicalProjectManager",
+  JuniorProgrammer = "JuniorProgrammer",
+}
+
 export class Agent {
   private readonly MAX_ITERATIONS = 50
   private readonly MAX_MESSAGES = 50
@@ -11,8 +16,9 @@ export class Agent {
 
   constructor(
     private readonly openai: OpenAI,
-    private readonly tools: Tool[],
+    public readonly role: AgentRole,
     private readonly systemPrompt: string,
+    private readonly tools: Tool[],
     private messages: OpenAIMessage[] = [],
   ) {
     this.toolMap = tools.reduce((map, tool) => ({

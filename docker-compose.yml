@@ -3,10 +3,12 @@ services:
     container_name: ai-coder-sandbox
     build: ./docker/sandbox
     volumes:
-      - sandbox_data:/home/agentuser
+      - type: bind
+        source: /Users/adamsiler/projects/ai-coder-sandbox
+        target: /home/coder-agent
     stdin_open: true
     tty: true
-    working_dir: /home/agentuser/project
+    working_dir: /home/coder-agent/project
     
   mongodb:
     container_name: ai-coder-mongodb
@@ -18,9 +20,4 @@ services:
 
 volumes:
   sandbox_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /Users/adamsiler/projects/ai-coder-sandbox
   mongodb_data:

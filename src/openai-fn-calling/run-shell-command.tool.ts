@@ -8,10 +8,10 @@ type MyExecResult = {
   status: number
 }
 
-const myExec = async (command: string): Promise<MyExecResult> => {
+const myExec = async (user: string, command: string): Promise<MyExecResult> => {
   return new Promise((resolve) => {
     exec([
-      `docker exec -i ai-coder-sandbox sh <<'SANDBOX'`,
+      `docker exec -i --user ${user} ai-coder-sandbox sh <<'SANDBOX'`,
       command,
       `SANDBOX`,
     ].join("\n"), (err, stdout, stderr) => {
@@ -61,7 +61,7 @@ export const limitLines = (input: string, maxLines = 100): string => {
   }
 }
 
-export const createRunShellCommandTool = (): Tool => {
+export const createRunShellCommandTool = (user: string): Tool => {
   const name = "runShellCommandTool"
   const schema = z.object({
     command: z.string().describe("Any valid Bash command or commands."),
@@ -71,19 +71,19 @@ export const createRunShellCommandTool = (): Tool => {
     name,
     description: [
       `Executes a Bash command in a new shell and returns the result.`,
-      `The shell always starts in the project root, \`~/project\`.`,
+      `The shell always starts in the project root.`,
       `Be careful to properly escape special characters. You may have to double- or triple-escape characters.`,
-      `Put any temporary or backup files that you create in \`/tmp\`.`,
+      `Use \`/tmp\` for temporary files.`,
     ].join(" "),
     schema,
     invoke: async (tool_call_id: string, { command }: z.infer<typeof schema>) => {
       console.log(`${name} invoked with "${command}"`)
       // const result = myExecSync(command)
-      const result = await myExec(command)
+      const result = await myExec(user, command)
       return [{
         role: "tool",
-        content: formatResult(result),
         tool_call_id,
+        content: formatResult(result),
         name,
       }]
     },

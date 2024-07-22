@@ -4,12 +4,14 @@ RUN apt-get update && \
     apt-get install -y git jq man-db && \
     apt-get clean
 
-RUN useradd --create-home --shell /bin/bash agentuser
+RUN useradd --create-home --shell /bin/bash planner-agent
+RUN useradd --create-home --shell /bin/bash coder-agent
 
-USER agentuser
+USER coder-agent
+RUN mkdir -p /home/coder-agent/project
+# read-only for other users
+RUN chmod -R 755 /home/coder-agent
 
-RUN mkdir -p /home/agentuser/project
+WORKDIR /home/coder-agent/project
 
-WORKDIR /home/agentuser/project
-
-VOLUME ["/home/agentuser"]
+VOLUME ["/home/coder-agent"]
