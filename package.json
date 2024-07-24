@@ -7,9 +7,7 @@
     "docker:down": "docker compose down",
     "test": "jest",
     "test:watch": "jest --watch",
-    "agentsAsTools": "npm run docker:up && ts-node src/agents-as-tools",
-    "openaiFnCalling": "npm run docker:up && ts-node src/openai-fn-calling",
-    "start": "npm run openaiFnCalling"
+    "start": "npm run docker:up && ts-node src"
   },
   "author": "",
   "license": "ISC",

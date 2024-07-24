@@ -1,5 +1,5 @@
 import OpenAI from "openai"
-import { Tool } from "./tool"
+import { Tool } from "../tools/tool"
 
 type OpenAIMessage = OpenAI.Chat.Completions.ChatCompletionMessageParam
 type OpenAIToolCall = OpenAI.Chat.Completions.ChatCompletionMessageToolCall

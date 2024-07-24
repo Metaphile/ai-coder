@@ -1,6 +1,6 @@
 import OpenAI from "openai"
 import { Agent, AgentRole } from "./agent"
-import { createRunShellCommandTool } from "./run-shell-command.tool"
+import { createRunShellCommandTool } from "../tools/run-shell-command.tool"
 
 export const createCoderAgent = async (): Promise<Agent> => {
   const openai = new OpenAI()

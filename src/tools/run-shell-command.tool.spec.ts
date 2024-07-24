@@ -1,4 +1,4 @@
-import { limitLines } from "./run-shell-command.tool";
+import { limitLines } from "./run-shell-command.tool"
 
 describe(limitLines, () => {
   const testCases = [

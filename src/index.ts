@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv"
-import { createCli } from "../utils/create-cli"
-import { createCoderAgent } from "./coder.agent"
-import { createPlannerAgent } from "./planner.agent"
+import { createCli } from "./utils/create-cli"
+import { createCoderAgent } from "./agents/coder.agent"
+import { createPlannerAgent } from "./agents/planner.agent"
 
 dotenv.config({ path: ".env" })
 

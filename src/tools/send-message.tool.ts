@@ -1,6 +1,6 @@
 import { z } from "zod"
 import { createTool } from "./tool"
-import { Agent } from "./agent"
+import { Agent } from "../agents/agent"
 
 export const createSendMessageTool = (agent: Agent) => {
   const name = `sendMessageTo${agent.role}`
